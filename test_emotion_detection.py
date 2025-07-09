@@ -7,6 +7,8 @@
 # I am really afraid that this will happen	fear
 import unittest
 from EmotionDetection.emotion_detection import emotion_detector, print_as_json
+from server import app
+
 
 class TestEmotionDetection(unittest.TestCase):
     def test_positive_emotion(self):
@@ -48,3 +50,13 @@ class TestEmotionDetection(unittest.TestCase):
         print_as_json(emotions)
         self.assertIsNotNone(emotions)
         self.assertEqual(emotions['dominant_emotion'], 'fear')
+
+    def test_emotion_detector_joy(self):
+        with app.test_client() as client:
+            response = client.get('/emotionDetector?textToAnalyze=I%20think%20I%20am%20having%20fun')
+            assert response.status_code == 200
+            data = response.get_json()
+            assert data["dominant_emotion"] == "joy"
+
+
+unittest.main()
