@@ -55,13 +55,3 @@ def emotion_detector(text_to_analyze):
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
         return None
-
-sentence_1 = "I love this new technology."
-print(f"Sentence 1: {sentence_1}")
-emotions_1 = emotion_detector(sentence_1)
-print_as_json(emotions_1)
-
-sentence_2 = "I hate this new technology."
-print(f"Sentence 2: {sentence_2}")
-emotions_2 = emotion_detector(sentence_2)
-print_as_json(emotions_2)
